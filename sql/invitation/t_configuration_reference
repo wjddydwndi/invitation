@@ -1,0 +1,65 @@
+-- auto-generated definition
+create table t_configuration_reference
+(
+    seq         bigint auto_increment
+        primary key,
+    category    varchar(64)                         not null,
+    code        varchar(30)                         not null,
+    value       varchar(100)                        not null,
+    description varchar(100)                        not null,
+    enabled     bit       default b'0'              not null,
+    create_time timestamp default CURRENT_TIMESTAMP null,
+    update_time timestamp default CURRENT_TIMESTAMP null
+);
+
+create index t_configuration_reference_category_index
+    on t_configuration_reference (category);
+
+create index t_configuration_reference_code_index
+    on t_configuration_reference (code);
+
+create index t_configuration_reference_create_time_index
+    on t_configuration_reference (create_time);
+
+create index t_configuration_reference_seq_index
+    on t_configuration_reference (seq);
+
+create index t_configuration_reference_update_time_index
+    on t_configuration_reference (update_time);
+
+
+
+DELIMITER $$
+CREATE TRIGGER sync_onfiguration_updator_by_insert
+    AFTER INSERT ON invitation.t_configuration_reference FOR EACH ROW
+BEGIN
+    UPDATE invitation.t_configuration SET update_time = CURRENT_TIMESTAMP
+    WHERE category = 'CONFIG' AND code = 'BLOCKED_ADDRESS';
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER sync_onfiguration_updator_by_update
+    AFTER UPDATE ON invitation.t_configuration_reference FOR EACH ROW
+BEGIN
+    UPDATE invitation.t_configuration SET update_time = CURRENT_TIMESTAMP
+    WHERE category = 'CONFIG' AND code = 'BLOCKED_ADDRESS';
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER sync_onfiguration_updator_by_delete
+    AFTER DELETE ON invitation.t_configuration_reference FOR EACH ROW
+BEGIN
+    UPDATE invitation.t_configuration SET update_time = CURRENT_TIMESTAMP
+    WHERE category = 'CONFIG' AND code = 'BLOCKED_ADDRESS';
+END $$
+DELIMITER ;
+
+
+
+
+
+
+INSERT INTO invitation.t_configuration_reference (seq, category, code, value, description, enabled, create_time, update_time) VALUES (1, 'CONFIG', 'BLOCKED_ADDRESS', '-', null, true, '2022-11-17 17:48:09', '2022-11-17 17:48:09');
+INSERT INTO invitation.t_configuration_reference (seq, category, code, value, description, enabled, create_time, update_time) VALUES (2, 'CONFIG', 'ALLOWED_PAGE', '/login', '로그인 페이지', true, '2022-11-21 14:29:40', '2022-11-21 14:29:40');

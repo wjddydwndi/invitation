@@ -1,0 +1,27 @@
+-- auto-generated definition
+create table t_token
+(
+    seq           bigint                              not null
+        primary key,
+    user_id       varchar(36)                         not null,
+    access_token  varchar(100)                        not null,
+    refresh_token varchar(100)                        not null,
+    token_type    varchar(10)                         not null,
+    state         varchar(10)                         not null,
+    expire_time   mediumtext                          not null,
+    update_time   timestamp default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
+    create_time   timestamp default CURRENT_TIMESTAMP not null
+);
+
+create index t_token_create_time_index
+    on t_token (create_time);
+
+create index t_token_seq_index
+    on t_token (seq);
+
+create index t_token_update_time_index
+    on t_token (update_time);
+
+create index t_token_user_id_index
+    on t_token (user_id);
+

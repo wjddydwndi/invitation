@@ -1,0 +1,6 @@
+rootProject.name = 'invitation'
+include 'invitation-module-core-api'
+include 'invitation-module-core-commons'
+include 'invitation-module-core-batch'
+include 'invitation-module-data-rds'
+

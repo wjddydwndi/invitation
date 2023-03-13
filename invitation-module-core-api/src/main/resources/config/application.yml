@@ -1,0 +1,76 @@
+spring:
+  application:
+    name: api
+  http:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  schedule:
+    pool-size: 300
+  redis:
+    enable: true
+  rest:
+    connection-timeout: 10000
+    read-timeout: 20000
+
+
+server:
+  port: 10005
+  mode: local
+  operation: normal
+  api:
+    path: /apis
+  schedule:
+    pool-size: 10;
+  ssl:
+    enabled: false
+
+  tomcat:
+    max-connections:  2000
+    max-threads: 500
+    accept-count: 2000
+
+security:
+  enable-csrf: false
+  sessions: always
+  require-ssl: false
+
+
+
+#prod
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+    import:
+      - file:/home/apps/invitation/invitation-module-data-rds/src/main/resources/config/
+      - file:/home/apps/invitation/invitation-module-core-commons/src/main/resources/config/application.yml
+
+#dev
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+    import:
+      - file:/home/apps/invitation/invitation-module-data-rds/src/main/resources/config/
+      - file:/home/apps/invitation/invitation-module-core-commons/src/main/resources/config/application.yml
+
+#local
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+    import:
+      - file:/invitation/invitation-module-data-rds/src/main/resources/config/
+      - file:/invitation/invitation-module-core-commons/src/main/resources/config/application.yml
+
+
+

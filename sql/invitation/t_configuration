@@ -1,0 +1,31 @@
+
+-- auto-generated definition
+create table invitation.t_configuration
+(
+    seq         int auto_increment
+        primary key,
+    category    varchar(64)                         null,
+    code        varchar(30)                         not null,
+    value       varchar(100)                        null,
+    description varchar(100)                        null,
+    enabled     bit       default b'0'              not null,
+    is_reference bit      default b'0'              not null,
+    create_time timestamp default CURRENT_TIMESTAMP not null,
+    update_time timestamp default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
+    constraint t_configuration_code_uindex
+        unique (code)
+);
+
+create index t_configuration_create_time_index
+    on invitation.t_configuration (create_time);
+
+create index t_configuration_seq_index
+    on invitation.t_configuration (seq);
+
+
+INSERT INTO invitation.t_configuration (seq, category, code, value, description, enabled, is_reference, create_time, update_time) VALUES (1, 'CONFIG', 'MODE', 'DEV', 'SERVER MODE', true, false, '2022-11-04 16:37:35', '2022-11-14 10:30:17');
+INSERT INTO invitation.t_configuration (seq, category, code, value, description, enabled, is_reference, create_time, update_time) VALUES (2, 'CONFIG', 'ALLOWED_PAGE', 'Y', '진입 허용 페이지 ', true, true, '2022-11-16 12:25:22', '2022-11-21 14:32:12');
+INSERT INTO invitation.t_configuration (seq, category, code, value, description, enabled, is_reference, create_time, update_time) VALUES (3, 'CONFIG', 'SUPER_USER', 'hj.jeong@sbicosmoney.com', '마스터', true, false, '2022-11-16 12:26:49', '2022-11-16 18:09:32');
+INSERT INTO invitation.t_configuration (seq, category, code, value, description, enabled, is_reference, create_time, update_time) VALUES (4, 'CONFIG', 'BLOCKED_ADDRESS', 'Y', '아이피 차단 활성화 시킬 경우 t_blocked_address 참조', true, true, '2022-11-17 09:32:05', '2022-11-21 14:29:40');
+INSERT INTO invitation.t_configuration (seq, category, code, value, description, enabled, is_reference, create_time, update_time) VALUES (5, 'CONFIG', 'BLOCKED_USER', 'Y', '사용자 차단 활성화 시킬 경우 t_blocked_user 참조', true, true, '2022-11-17 17:38:43', '2022-11-17 17:54:35');
+INSERT INTO invitation.t_configuration (seq, category, code, value, description, enabled, is_reference, create_time, update_time) VALUES (6, 'CONFIG', 'PASSWORD', '123456', '마스터 패스워드', true, false, '2023-01-25 08:03:44', '2023-01-25 08:03:44');

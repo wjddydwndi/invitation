@@ -1,0 +1,28 @@
+-- auto-generated definition
+create table t_user
+(
+    seq            int auto_increment
+        primary key,
+    id             varchar(36)                         not null comment 'user id
+',
+    email          varchar(100)                        null comment '이메일',
+    last_name      varchar(50)                         null comment '성',
+    birth          date                                null comment '생년월일
+',
+    gender         char                                null comment '성별',
+    cell_no        char(11)                            not null,
+    password       varchar(100)                        not null comment '비밀번호',
+    nationality    char(3)                             null comment '국적 * currency로 표기.',
+    update_time    timestamp default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
+    create_time    timestamp default CURRENT_TIMESTAMP not null
+);
+
+create index t_user_create_time_index
+    on t_user (create_time);
+
+create index t_user_id_index
+    on t_user (id);
+
+create index t_user_seq_index
+    on t_user (seq);
+

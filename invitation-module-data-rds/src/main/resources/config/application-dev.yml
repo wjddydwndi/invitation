@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: data-rds
+  http:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  schedule:
+    pool-size: 300
+  redis:
+    enable: true
+    host:
+    port:
+    expire: 15
+    password:
+
+server:
+  module: data-rds
+  port:
+  mode: local
+  operation: normal
+  api:
+    path: /apis
+  schedule:
+    pool-size: 10;
+
+  tomcat:
+    max-connections: 2000
+    max-threads: 500
+    accept-count: 2000
+
+invitation:
+  datasource:
+    url:
+    username:
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #driver-class-name: net.sf.log4jdbc.DriverSpy
+    hikari:
+      enkey:
+      auto-commit: true
+      pool-size: 5
+      max-life-time: 1800000
+      idle-timeout: 30000
+      leak-detection-threshold: 30000
+      validation-timeout: 1500
+
+privacy:
+  datasource:
+    url:
+    username:
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #driver-class-name: net.sf.log4jdbc.DriverSpy
+    hikari:
+      enkey:
+      auto-commit: true
+      pool-size: 5
+      max-life-time: 1800000
+      idle-timeout: 30000
+      leak-detection-threshold: 3000
+      validation-timeout: 1500

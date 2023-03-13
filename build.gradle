@@ -1,0 +1,91 @@
+/*https://ryumodrn.tistory.com/7 */
+buildscript {
+    /** 전역변수 설정 **/
+    ext {
+        springBootVersion = '2.6.3'
+        queryDslVersion = '4.4.0'
+    }
+    /** 의존성 설정 **/
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE")
+    }
+}
+
+plugins {
+    id "org.springframework.boot"  version "2.4.5"
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+    id 'java'
+}
+
+group 'com.module.invitation'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+subprojects {
+    apply plugin : 'java'
+    apply plugin : 'org.springframework.boot'
+    apply plugin : 'io.spring.dependency-management'
+
+
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+    tasks.withType(JavaCompile){
+        options.encoding = 'UTF-8'
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+
+        testImplementation 'org.projectlombok:lombok'
+        testAnnotationProcessor  'org.projectlombok:lombok'
+
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation group: 'org.mockito', name: 'mockito-all', version: '1.9.5'
+
+        //implementation "com.fasterxml.jackson.core:jackson-core:2.9.9"
+        //implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.9'
+
+        /* implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
+         implementation 'org.springframework.boot:spring-boot-starter-web'
+         implementation 'org.springframework.session:spring-session-core'
+
+         annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+         testImplementation 'org.springframework.batch:spring-batch-test'
+
+ */
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+    
+}
+/*
+project(':invitation-module-core-api') {
+    dependencies {
+        implementation project(':invitation-module-core-commons')
+    }
+}
+
+project(':invitation-module-core-batch') {
+    dependencies {
+        implementation project(':invitation-module-core-commons')
+    }
+}*/

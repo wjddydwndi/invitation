@@ -1,0 +1,70 @@
+spring:
+  http:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 10005
+  mode: local
+  operation: normal
+  api:
+    path: /apis
+  schedule:
+    pool-size: 10;
+
+  tomcat:
+    max-connections:  2000
+    max-threads: 500
+    accept-count: 2000
+
+
+invitation:
+  module: api
+  invitation:
+    datasource:
+      url: jdbc:mysql://146.56.180.17:33061/invitation
+      username: ubuntu
+      password: ghwls12!!
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      #driver-class-name: net.sf.log4jdbc.DriverSpy
+      hikari:
+        enkey:
+        auto-commit: true
+        pool-size: 5
+        max-life-time: 1800000
+        idle-timeout: 30000
+        leak-detection-threshold: 60000
+        validation-timeout: 1500
+
+  privacy:
+    datasource:
+      url: jdbc:mysql://146.56.180.17:33061/privacy
+      username: ubuntu
+      password: ghwls12!!
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      #driver-class-name: net.sf.log4jdbc.DriverSpy
+      hikari:
+        enkey:
+        auto-commit: true
+        pool-size: 5
+        max-life-time: 1800000
+        idle-timeout: 30000
+        leak-detection-threshold: 60000
+        validation-timeout: 1500
+
+
+token:
+  secret: invitation
+  access-expiration: 3600
+  refresh-expireation: 86400
+
+

@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: core-commons
+  http:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB
+
+server:
+  port: 10009
+  mode: local
+  operation: normal
+  tomcat:
+    max-connections:  2000
+    max-threads: 500
+    accept-count: 2000
+
+token:
+  access-expiration: 3600
+  refresh-expiration: 86400
+  secret: invitation
+
+#local
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+logging :
+  config : classpath:logging/logback-local.xml
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - prod
+        - dev
+logging :
+  config : classpath:logging/logback.xml

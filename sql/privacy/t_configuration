@@ -1,0 +1,23 @@
+-- auto-generated definition
+create table t_configuration
+(
+    seq         int auto_increment
+        primary key,
+    category    varchar(64)                         null,
+    code        varchar(10)                         not null,
+    value       varchar(20)                         null,
+    description varchar(100)                        null,
+    enabled     bit       default b'0'              not null,
+    is_reference bit       default b'0'              not null,
+    create_time timestamp default CURRENT_TIMESTAMP not null,
+    update_time timestamp default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
+    constraint t_configuration_code_uindex
+        unique (code)
+);
+
+create index t_configuration_create_time_index
+    on t_configuration (create_time);
+
+create index t_configuration_seq_index
+    on t_configuration (seq);
+
